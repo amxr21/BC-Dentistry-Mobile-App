@@ -7,9 +7,10 @@ import { RequestsHeader, DataRequest } from '../../components'
 import { dataRequests } from '../../data' 
 
 const requests = () => {
+  
   return (
-    <View>
-      <StatusBar style='light' />
+    <SafeAreaView>
+      <StatusBar style='dark' />
 
       <RequestsHeader requests={dataRequests} />
 
@@ -43,7 +44,7 @@ const requests = () => {
 
 
       </ScrollView>
-    </View>
+    </SafeAreaView>
   )
 }
 
