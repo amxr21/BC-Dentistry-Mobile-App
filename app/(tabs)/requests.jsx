@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import { RequestsHeader, DataRequest } from '../../components';
 
-const API_BASE_URL = 'http://192.168.10.22:8081'; 
+const API_BASE_URL = 'http://openuae.fortiddns.com:28081'; 
 
 const Requests = () => {
     const [requests, setRequests] = useState([]); // Store API response
