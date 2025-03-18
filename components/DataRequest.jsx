@@ -12,31 +12,42 @@ const DataRequest = ({type, from, to, status, id, about, date, time}) => {
 
     const [ isExpanded, setIsExpanded ] = useState(false);
 
-    const [ isAccepted, setIsAccepted ] = useState(false)
+    // const [ isAccepted, setIsAccepted ] = useState(false)
+
+    const [currentStatus, setCurrentStatus] = useState(status); // Store current request status
 
     const expandCard = () => {
         setIsExpanded((p) => !p)
     }
 
-    const changeStatus = () => {
-        setIsAccepted((p) => !p)
+    // const changeStatus = () => {
+    //     setIsAccepted((p) => !p)
         
-    }
+    // }
     const [statusBg, setStatusBg] = useState('min-h-0 h-0'); // use state for statusBg
 
  
-    useEffect(() => {
-        if (isAccepted) {
-            setStatusBg('min-h-full h-full');
-            setTimeout(() => {
-                setStatusBg('min-h-0 h-0');
-            }, 3000);
-        } else {
-            setStatusBg('min-h-0 h-0');
-        }
+    // useEffect(() => {
+    //     if (isAccepted) {
+    //         setStatusBg('min-h-full h-full');
+    //         setTimeout(() => {
+    //             setStatusBg('min-h-0 h-0');
+    //         }, 3000);
+    //     } else {
+    //         setStatusBg('min-h-0 h-0');
+    //     }
 
-    }, [isAccepted])
-    
+    // }, [isAccepted])
+    useEffect(() => {
+        if (currentStatus === "CONSENT_GRANTED") {
+            setStatusBg("bg-green-500");
+        } else if (currentStatus === "REQUEST_REJECTED") {
+            setStatusBg("bg-red-500");
+        } else {
+            setStatusBg("min-h-0 h-0");
+        }
+    }, [currentStatus]);
+
 
 
   return (
@@ -99,8 +110,11 @@ const DataRequest = ({type, from, to, status, id, about, date, time}) => {
                         containerClasses={"flex flex-row justify-between gap-x-8"}
                         header={"Status:"}
                         headerClasses={"text-xl"}
-                        details={status}
-                        detailsClasses={`grow text-right text-xl uppercase font-bold ${status.toLowerCase() == 'pending'? 'text-[#FF9500]': status.toLowerCase() == 'granted' ? 'text-green-500' : 'text-red-600'}`}
+                        details={currentStatus}  //  Updated dynamically
+                        detailsClasses={`grow text-right text-xl uppercase font-bold 
+                            ${currentStatus === 'PENDING_PATIENT_CONSENT' ? 'text-[#FF9500]' :
+                            currentStatus === 'CONSENT_GRANTED' ? 'text-green-500' :
+                            'text-red-600'}`}
                     />
 
             
@@ -115,7 +129,8 @@ const DataRequest = ({type, from, to, status, id, about, date, time}) => {
                         details={`${date.replace('-','.').replace('-','.')} : ${time}`}
                         detailsClasses={"text-lg text-gray-300 font-normal italic"}
                     />
-                    <AccesptReject func={changeStatus} />
+                    {/* <AccesptReject func={changeStatus} /> */}
+                    <AccesptReject requestID={id} patientID={to} updateStatus={setCurrentStatus} />
 
                 </>
 

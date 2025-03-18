@@ -1,51 +1,71 @@
-import { View, Text, SafeAreaView, ScrollView } from 'react-native'
-import { StatusBar } from 'expo-status-bar'
-import React from 'react'
+import { View, Text, SafeAreaView, ScrollView } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-import { RequestsHeader, DataRequest } from '../../components'
+import { RequestsHeader, DataRequest } from '../../components';
 
-import { dataRequests } from '../../data' 
+const API_BASE_URL = 'http://192.168.10.22:8081'; 
 
-const requests = () => {
-  
-  return (
-    <SafeAreaView>
-      <StatusBar style='dark' />
+const Requests = () => {
+    const [requests, setRequests] = useState([]); // Store API response
+    const [loading, setLoading] = useState(true);
 
-      <RequestsHeader requests={dataRequests} />
+    useEffect(() => {
+        const fetchRequests = async () => {
+            try {
+                const response = await axios.get(`${API_BASE_URL}/getPendingRequestsForPatient/Patient1`);
+                console.log("Fetched Requests:", response.data);
+                
+                if (response.data.length > 0) {
+                    setRequests(response.data);
+                } else {
+                    console.warn("No pending requests found.");
+                }
+            } catch (error) {
+                console.error("API Error:", error.response?.data || error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
+        fetchRequests();
+    }, []);
 
+    return (
+        <View>
+            <StatusBar style='light' />
 
-      <ScrollView className='px-8 flex flex-col gap-y-8 h-[60vh]'>
+            {/* Requests Header */}
+            <RequestsHeader requests={requests} />
 
-        <View className="flex flex-col gap-6 py-10">
-          {
-            dataRequests.map((request) => {
-              return (
-                <DataRequest
-                  key={request.id}
-                  type = {request.type}
-                  from = {request.from}
-                  to = {request.to}
-                  status = {request.status}
-                  id = {request.id}
-                  about = {request.about}
-                  date = {request.date}
-                  time = {request.time}
-                />
+            <ScrollView className='px-8 flex flex-col gap-y-8 h-[60vh]'>
 
-              )
-            })
-          }
+                <View className="flex flex-col gap-6 py-10">
+                    {loading ? (
+                        <Text>Loading requests...</Text>
+                    ) : requests.length === 0 ? (
+                        <Text>No pending requests</Text>
+                    ) : (
+                        requests.map((request) => (
+                            <DataRequest
+                                key={request.requestID}  // Use API ID
+                                type={request.type || "on-chain"}  
+                                from={request.doctorID}
+                                to={request.patientID}
+                                status={request.status}
+                                id={request.requestID}
+                                about={request.about || "N/A"}
+                                date={request.date || "N/A"}
+                                time={request.time || "N/A"}
+                            />
+                        ))
+                    )}
+                </View>
 
+            </ScrollView>
         </View>
+    );
+};
 
-
-
-
-      </ScrollView>
-    </SafeAreaView>
-  )
-}
-
-export default requests
+export default Requests;
