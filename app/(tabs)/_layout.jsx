@@ -6,7 +6,7 @@ import { icons } from '../../constants'
 
 const TabIcon = ({icon, color, name, focused}) => {
   return (
-    <View className="w-16 h-16 flex gap-2 items-center justify-center">
+    <View className="w-16 h-16 flex flex-r gap-2 items-center justify-center">
       <Image
         source={icon}
         resizeMode='contain'
@@ -65,7 +65,7 @@ const tabsLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.Requests}
+                icon={icons.Pending}
                 color={color}
                 name="Requests"
                 focused={focused}
@@ -95,9 +95,9 @@ const tabsLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.Setting}
+                icon={icons.Personal}
                 color={color}
-                name="Settings"
+                name="Info"
                 focused={focused}
               />
             )  

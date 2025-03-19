@@ -11,6 +11,17 @@ import blueClock from "../assets/images/icons/clock-blue.png"
 import greenClock from "../assets/images/icons/clock-green.png"
 import time from "../assets/images/icons/time.png"
 import options from "../assets/images/icons/options.png"
+import Personal from "../assets/images/icons/personal.png"
+import Pending from "../assets/images/icons/pending.png"
+
+import Location from "../assets/images/icons/location.png"
+import Doctors from "../assets/images/icons/doctor.png"
+import Calendar from "../assets/images/icons/calendar.png"
+import Email from "../assets/images/icons/email.png"
+import Phone from "../assets/images/icons/phone.png"
+
+import Attachment from "../assets/images/icons/attachment.png"
+import Approve from "../assets/images/icons/approve.png"
 
 
 export default {
@@ -27,4 +38,13 @@ export default {
     greenClock,
     time,
     options,
+    Personal,
+    Pending,
+    Location,
+    Doctors,
+    Calendar,
+    Email,
+    Phone,
+    Attachment,
+    Approve,
 }
