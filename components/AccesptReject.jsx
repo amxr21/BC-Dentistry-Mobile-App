@@ -35,14 +35,17 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { CustomButton } from './index';
 
-const API_BASE_URL = 'http://192.168.10.22:8081'; 
+const API_BASE_URL = 'http://openuae.fortiddns.com:28081'; 
 
-const AccesptReject = ({ requestID, patientID, updateStatus }) => {
+const AccesptReject = ({ requestID, patientID, updateStatus, requestsStatus, cardStatus }) => {
     const [loading, setLoading] = useState(false);
 
     const handleAccept = async () => {
       setLoading(true);
+      console.log('Accept');
+      
       try {
+          requestsStatus(true)
           const response = await axios.post(`${API_BASE_URL}/provideConsent`, {
               patientID,
               requestID,
@@ -52,9 +55,12 @@ const AccesptReject = ({ requestID, patientID, updateStatus }) => {
           updateStatus("CONSENT_GRANTED"); // 🔥 UI will update dynamically
       } catch (error) {
           console.error("Error Accepting Request:", error.response?.data || error.message);
-          Alert.alert("Error", "Failed to accept request.");
+        //   Alert.alert("Error", "Failed to accept request.");
       } finally {
           setLoading(false);
+          requestsStatus(false)
+          cardStatus(false)
+
       }
   };
   
@@ -84,7 +90,7 @@ const AccesptReject = ({ requestID, patientID, updateStatus }) => {
                 key="reject"
                 classes={"grow"}
                 containerClasses={"border border-red-500 p-2 rounded-xl bg-red-500"}
-                text={loading ? "Rejecting..." : "Reject"}
+                text={"Reject"}
                 textClasses={"text-center text-white font-semibold text-lg"}
                 handleClick={handleReject}
                 disabled={loading}
@@ -94,7 +100,7 @@ const AccesptReject = ({ requestID, patientID, updateStatus }) => {
                 key="accept"
                 classes={"grow"}
                 containerClasses={"border border-green-500 p-2 rounded-xl bg-green-500"}
-                text={loading ? "Accepting..." : "Accept"}
+                text={"Accept"}
                 textClasses={"text-center text-white font-semibold text-lg"}
                 handleClick={handleAccept}
                 disabled={loading}

@@ -26,6 +26,12 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
     // }
     const [statusBg, setStatusBg] = useState('min-h-0 h-0'); // use state for statusBg
 
+    const [ requestProcessing, setRequestProcessing ] = useState(false);
+
+    
+
+
+
  
     // useEffect(() => {
     //     if (isAccepted) {
@@ -53,10 +59,12 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
   return (
     <View className="bg-white relative  rounded-xl overflow-hidden">
         
-        {/* <StatusUpdateLoading
-            reff = {requestCard}
-            status = {statusBg}
-        /> */}
+        {
+            requestProcessing && <StatusUpdateLoading
+                reff = {requestCard}
+                status = {statusBg}
+            />
+        }
 
         <View className="flex p-4 flex-col gap-y-2 rounded-xl">
             <View className={`${type.toLowerCase() == 'off-chain' ? "bg-red-600" : "bg-green-600" } rounded-xl`}>
@@ -130,12 +138,11 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
                         detailsClasses={"text-lg text-gray-300 font-normal italic"}
                     />
                     {/* <AccesptReject func={changeStatus} /> */}
-                    <AccesptReject requestID={id} patientID={to} updateStatus={setCurrentStatus} />
+                    <AccesptReject requestID={id} patientID={to} updateStatus={setCurrentStatus} requestsStatus={setRequestProcessing} cardStatus={setIsExpanded} />
 
                 </>
 
             }
-
             {
                 optionsVisible && <CustomButton
                     key={1}

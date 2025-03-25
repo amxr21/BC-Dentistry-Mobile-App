@@ -42,6 +42,17 @@ const Requests = () => {
             <ScrollView className='px-8 flex flex-col gap-y-8 h-[60vh]'>
 
                 <View className="flex flex-col gap-6 py-10">
+                    <DataRequest
+                        key={101}  // Use API ID
+                        type={"on-chain"}  
+                        from={"Ali"}
+                        to={"Ahmad"}
+                        status={'Pending'}
+                        id={101}
+                        about={ "N/A"}
+                        date={ "N/A"}
+                        time={ "N/A"}
+                    />
                     {loading ? (
                         <Text>Loading requests...</Text>
                     ) : requests.length === 0 ? (
