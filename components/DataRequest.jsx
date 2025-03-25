@@ -6,7 +6,7 @@ import { CustomButton, DataRequestElement, AccesptReject, StatusUpdateLoading } 
 
 
 
-const DataRequest = ({type, from, to, status, id, about, date, time}) => {
+const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisible = true}) => {
 
     const requestCard = useRef()
 
@@ -39,9 +39,9 @@ const DataRequest = ({type, from, to, status, id, about, date, time}) => {
 
     // }, [isAccepted])
     useEffect(() => {
-        if (currentStatus === "CONSENT_GRANTED") {
+        if (currentStatus == "CONSENT_GRANTED") {
             setStatusBg("bg-green-500");
-        } else if (currentStatus === "REQUEST_REJECTED") {
+        } else if (currentStatus == "REQUEST_REJECTED") {
             setStatusBg("bg-red-500");
         } else {
             setStatusBg("min-h-0 h-0");
@@ -53,10 +53,10 @@ const DataRequest = ({type, from, to, status, id, about, date, time}) => {
   return (
     <View className="bg-white relative  rounded-xl overflow-hidden">
         
-        <StatusUpdateLoading
+        {/* <StatusUpdateLoading
             reff = {requestCard}
             status = {statusBg}
-        />
+        /> */}
 
         <View className="flex p-4 flex-col gap-y-2 rounded-xl">
             <View className={`${type.toLowerCase() == 'off-chain' ? "bg-red-600" : "bg-green-600" } rounded-xl`}>
@@ -67,11 +67,11 @@ const DataRequest = ({type, from, to, status, id, about, date, time}) => {
             {
                 isExpanded && 
                 <DataRequestElement 
-                    containerClasses={"flex flex-row justify-between gap-x-8"}
+                    containerClasses={"flex flex-col justify-between overflow-hidden"}
                     details={id}
-                    detailsClasses={`grow text-right text-xl uppercase font-bold`}
-                    header={"ID:"}
                     headerClasses={"text-xl"}
+                    detailsClasses={`text- text-xl uppercase font-bold`}
+                    header={"ID:"}
                 />
             }
 
@@ -110,7 +110,7 @@ const DataRequest = ({type, from, to, status, id, about, date, time}) => {
                         containerClasses={"flex flex-row justify-between gap-x-8"}
                         header={"Status:"}
                         headerClasses={"text-xl"}
-                        details={currentStatus}  //  Updated dynamically
+                        details={currentStatus == "CONSENT_GRANTED" ? "GRANTED" : currentStatus == "PENDING_PATIENT_CONSENT" ? "PENDING" : "REJECTED"}  //  Updated dynamically
                         detailsClasses={`grow text-right text-xl uppercase font-bold 
                             ${currentStatus === 'PENDING_PATIENT_CONSENT' ? 'text-[#FF9500]' :
                             currentStatus === 'CONSENT_GRANTED' ? 'text-green-500' :
@@ -136,15 +136,17 @@ const DataRequest = ({type, from, to, status, id, about, date, time}) => {
 
             }
 
+            {
+                optionsVisible && <CustomButton
+                    key={1}
+                    classes={""}
+                    containerClasses={"border-t pt-3 mt-2"}
+                    text={!isExpanded ? 'Show Details' : 'Hide Details'}
+                    textClasses={"text-center"}
+                    handleClick={expandCard}
+                />
 
-            <CustomButton
-                key={1}
-                classes={""}
-                containerClasses={"border-t pt-3 mt-2"}
-                text={!isExpanded ? 'Show Details' : 'Hide Details'}
-                textClasses={"text-center"}
-                handleClick={expandCard}
-            />
+            }
 
         </View>
 

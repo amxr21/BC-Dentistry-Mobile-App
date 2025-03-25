@@ -14,7 +14,7 @@ const Requests = () => {
     useEffect(() => {
         const fetchRequests = async () => {
             try {
-                const response = await axios.get(`${API_BASE_URL}/getPendingRequestsForPatient/Patient1`);
+                const response = await axios.get(`${API_BASE_URL}/getAllRequestsForPatient/Patient1`);
                 console.log("Fetched Requests:", response.data);
                 
                 if (response.data.length > 0) {
@@ -47,7 +47,7 @@ const Requests = () => {
                     ) : requests.length === 0 ? (
                         <Text>No pending requests</Text>
                     ) : (
-                        requests.map((request) => (
+                        requests.filter((request) => request.status == 'PENDING_PATIENT_CONSENT').map((request) => (
                             <DataRequest
                                 key={request.requestID}  // Use API ID
                                 type={request.type || "on-chain"}  

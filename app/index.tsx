@@ -15,7 +15,7 @@ export default function Index() {
   useEffect(() => {
     const timer = setTimeout(()=>{
       // route.push('/(auth)/sign-in')
-      route.push('/(tabs)/settings')
+      route.push('/(tabs)/requests')
     }, 3000)
 
 
