@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Animated } from 'react-native'
 import React, { useRef, useState, useEffect } from 'react'
 
 import { CustomButton, DataRequestElement, AccesptReject, StatusUpdateLoading } from './index'
@@ -14,10 +14,35 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
 
     // const [ isAccepted, setIsAccepted ] = useState(false)
 
+
+
+    const animatedHeight = useRef(new Animated.Value(0)).current
+
+
+
     const [currentStatus, setCurrentStatus] = useState(status); // Store current request status
 
-    const expandCard = () => {
-        setIsExpanded((p) => !p)
+
+
+    const requestCardButton = useRef()
+    
+    const expandCard = (e) => {
+        if(isExpanded){
+            Animated.timing(animatedHeight, {
+                toValue:0,
+                duration: 300,
+                useNativeDriver: false,
+            }).start(setIsExpanded((p) => !p))
+        }
+        else{
+            setIsExpanded(true)
+            Animated.timing(animatedHeight, {
+                toValue: 150,
+                duration: 300,
+                useNativeDriver: false,
+            }).start()
+            
+        }
     }
 
     // const changeStatus = () => {
@@ -30,20 +55,6 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
 
     
 
-
-
- 
-    // useEffect(() => {
-    //     if (isAccepted) {
-    //         setStatusBg('min-h-full h-full');
-    //         setTimeout(() => {
-    //             setStatusBg('min-h-0 h-0');
-    //         }, 3000);
-    //     } else {
-    //         setStatusBg('min-h-0 h-0');
-    //     }
-
-    // }, [isAccepted])
     useEffect(() => {
         if (currentStatus == "CONSENT_GRANTED") {
             setStatusBg("bg-green-500");
@@ -71,18 +82,6 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
                 <Text className="text-white px-3 py-2  text-2xl uppercase font-bold">{type}</Text>
             </View>
 
-
-            {
-                isExpanded && 
-                <DataRequestElement 
-                    containerClasses={"flex flex-col justify-between overflow-hidden"}
-                    details={id}
-                    headerClasses={"text-xl"}
-                    detailsClasses={`text- text-xl uppercase font-bold`}
-                    header={"ID:"}
-                />
-            }
-
                 <DataRequestElement 
                     containerClasses={""}
                     header={"Request from:"}
@@ -92,61 +91,71 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
                 />
 
 
-            {
-                isExpanded && 
+            <Animated.View style={{height: animatedHeight, overflow:'hidden'}}>
+                isExpanded &&
                 <>
-                    <DataRequestElement 
-                        containerClasses={""}
-                        header={"Request for:"}
-                        headerClasses={"text-xl"}
-                        details={`${to}`}
-                        detailsClasses={"text-2xl font-bold"}
-                    />
+                        <DataRequestElement 
+                            header={"ID:"}
+                            containerClasses={"flex flex-col justify-between overflow-hidden"}
+                            details={id}
+                            headerClasses={"text-xl"}
+                            detailsClasses={`text- text-xl uppercase font-bold`}
+                        />
+                        <DataRequestElement 
+                            header={"Request for:"}
+                            containerClasses={""}
+                            headerClasses={"text-xl"}
+                            details={`${to}`}
+                            detailsClasses={"text-2xl font-bold"}
+                        />
 
-                    <DataRequestElement 
-                        containerClasses={"flex flex-row justify-between"}
-                        header={"For: "}
-                        headerClasses={"text-xl font-semibold"}
-                        details={about}
-                        detailsClasses={"text-xl font-semibold"}
-                    />
+                        <DataRequestElement 
+                            header={"For: "}
+                            containerClasses={"flex flex-row justify-between"}
+                            headerClasses={"text-xl font-semibold"}
+                            details={about}
+                            detailsClasses={"text-xl font-semibold"}
+                        />
+
+                
+                        <DataRequestElement 
+                            containerClasses={"flex flex-row justify-between"}
+                            header={"Requested at:"}
+                            headerClasses={"text-lg text-gray-300 font-normal italic"}
+                            details={`${date.replace('-','.').replace('-','.')} : ${time}`}
+                            detailsClasses={"text-lg text-gray-300 font-normal italic"}
+                        />
+                        {/* <AccesptReject func={changeStatus} /> */}
+                        
+                        
+                        <AccesptReject requestID={id} patientID={to} updateStatus={setCurrentStatus} requestsStatus={setRequestProcessing} cardStatus={setIsExpanded} />
+
+                     
+
+
 
                 </>
 
-            }
-                    <DataRequestElement 
-                        containerClasses={"flex flex-row justify-between gap-x-8"}
-                        header={"Status:"}
-                        headerClasses={"text-xl"}
-                        details={currentStatus == "CONSENT_GRANTED" ? "GRANTED" : currentStatus == "PENDING_PATIENT_CONSENT" ? "PENDING" : "REJECTED"}  //  Updated dynamically
-                        detailsClasses={`grow text-right text-xl uppercase font-bold 
-                            ${currentStatus === 'PENDING_PATIENT_CONSENT' ? 'text-[#FF9500]' :
-                            currentStatus === 'CONSENT_GRANTED' ? 'text-green-500' :
-                            'text-red-600'}`}
-                    />
+            </Animated.View>
 
-            
 
-            {
-                isExpanded && 
-                <>
-                    <DataRequestElement 
-                        containerClasses={"flex flex-row justify-between"}
-                        header={"Requested at:"}
-                        headerClasses={"text-lg text-gray-300 font-normal italic"}
-                        details={`${date.replace('-','.').replace('-','.')} : ${time}`}
-                        detailsClasses={"text-lg text-gray-300 font-normal italic"}
-                    />
-                    {/* <AccesptReject func={changeStatus} /> */}
-                    <AccesptReject requestID={id} patientID={to} updateStatus={setCurrentStatus} requestsStatus={setRequestProcessing} cardStatus={setIsExpanded} />
+            <DataRequestElement 
+                            header={"Status:"}
+                            containerClasses={"flex flex-row justify-between gap-x-8"}
+                            headerClasses={"text-xl"}
+                            details={currentStatus == "CONSENT_GRANTED" ? "GRANTED" : currentStatus == "PENDING_PATIENT_CONSENT" ? "PENDING" : "REJECTED"}  //  Updated dynamically
+                            detailsClasses={`grow text-right text-xl uppercase font-bold 
+                                ${currentStatus === 'PENDING_PATIENT_CONSENT' ? 'text-[#FF9500]' :
+                                currentStatus === 'CONSENT_GRANTED' ? 'text-green-500' :
+                                'text-red-600'}`}
+                        />
 
-                </>
 
-            }
             {
                 optionsVisible && <CustomButton
                     key={1}
                     classes={""}
+                    reff={requestCardButton}
                     containerClasses={"border-t pt-3 mt-2"}
                     text={!isExpanded ? 'Show Details' : 'Hide Details'}
                     textClasses={"text-center"}
@@ -154,6 +163,7 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
                 />
 
             }
+
 
         </View>
 
