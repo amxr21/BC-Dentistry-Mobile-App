@@ -91,7 +91,13 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
                     details={`Dr. ${from}`}
                     detailsClasses={"text-2xl font-bold"}
                 />
-
+                {!optionsVisible && <DataRequestElement 
+                    containerClasses={"flex flex-row justify-between"}
+                    header={"Requested at:"}
+                    headerClasses={"text-lg text-gray-300 font-normal italic"}
+                    details={`${date.replace('-','.').replace('-','.')} : ${time}`}
+                    detailsClasses={"text-lg text-gray-300 font-normal italic"}
+                />}
 
             <Animated.View style={{height: animatedHeight, overflow:'hidden'}}>
                 {isExpanded &&
