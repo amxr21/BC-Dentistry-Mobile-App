@@ -12,6 +12,9 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
 
     const [ isExpanded, setIsExpanded ] = useState(false);
 
+
+    const [ requestLoading, setRequestLoading ] = useState(false)
+
     // const [ isAccepted, setIsAccepted ] = useState(false)
 
 
@@ -37,7 +40,7 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
         else{
             setIsExpanded(true)
             Animated.timing(animatedHeight, {
-                toValue: 150,
+                toValue: 250,
                 duration: 300,
                 useNativeDriver: false,
             }).start()
@@ -50,9 +53,6 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
         
     // }
     const [statusBg, setStatusBg] = useState('min-h-0 h-0'); // use state for statusBg
-
-    const [ requestProcessing, setRequestProcessing ] = useState(false);
-
     
 
     useEffect(() => {
@@ -71,9 +71,11 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
     <View className="bg-white relative  rounded-xl overflow-hidden">
         
         {
-            requestProcessing && <StatusUpdateLoading
+            requestLoading && <StatusUpdateLoading
                 reff = {requestCard}
-                status = {statusBg}
+                status = {status}
+                requestLoadingStatus={requestLoading}
+                setrequestLoadingFunc={setRequestLoading}
             />
         }
 
@@ -92,7 +94,7 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
 
 
             <Animated.View style={{height: animatedHeight, overflow:'hidden'}}>
-                isExpanded &&
+                {isExpanded &&
                 <>
                         <DataRequestElement 
                             header={"ID:"}
@@ -128,27 +130,27 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
                         {/* <AccesptReject func={changeStatus} /> */}
                         
                         
-                        <AccesptReject requestID={id} patientID={to} updateStatus={setCurrentStatus} requestsStatus={setRequestProcessing} cardStatus={setIsExpanded} />
+                        <AccesptReject requestID={id} patientID={to} updateStatus={setCurrentStatus} setCardStatus={setIsExpanded} requestLoadingStatus={requestLoading} setrequestLoadingFunc={setRequestLoading} />
 
                      
 
 
 
-                </>
+                </>}
 
             </Animated.View>
 
 
             <DataRequestElement 
-                            header={"Status:"}
-                            containerClasses={"flex flex-row justify-between gap-x-8"}
-                            headerClasses={"text-xl"}
-                            details={currentStatus == "CONSENT_GRANTED" ? "GRANTED" : currentStatus == "PENDING_PATIENT_CONSENT" ? "PENDING" : "REJECTED"}  //  Updated dynamically
-                            detailsClasses={`grow text-right text-xl uppercase font-bold 
-                                ${currentStatus === 'PENDING_PATIENT_CONSENT' ? 'text-[#FF9500]' :
-                                currentStatus === 'CONSENT_GRANTED' ? 'text-green-500' :
-                                'text-red-600'}`}
-                        />
+                header={"Status:"}
+                containerClasses={"flex flex-row justify-between gap-x-8"}
+                headerClasses={"text-xl"}
+                details={currentStatus == "CONSENT_GRANTED" ? "GRANTED" : currentStatus == "PENDING_PATIENT_CONSENT" ? "PENDING" : "REJECTED"}  //  Updated dynamically
+                detailsClasses={`grow text-right text-xl uppercase font-bold 
+                    ${currentStatus === 'PENDING_PATIENT_CONSENT' ? 'text-[#FF9500]' :
+                    currentStatus === 'CONSENT_GRANTED' ? 'text-green-500' :
+                    'text-red-600'}`}
+            />
 
 
             {

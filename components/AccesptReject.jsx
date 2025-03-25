@@ -30,14 +30,14 @@
 // }
 
 // export default AccesptReject
-import { View, Text, Alert } from 'react-native';
+import { View, Text, Alert, Animated } from 'react-native';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { CustomButton } from './index';
 
 const API_BASE_URL = 'http://openuae.fortiddns.com:28081'; 
 
-const AccesptReject = ({ requestID, patientID, updateStatus, requestsStatus, cardStatus }) => {
+const AccesptReject = ({ requestID, patientID, updateStatus, requestLoadingStatus, setrequestLoadingFunc }) => {
     const [loading, setLoading] = useState(false);
 
     const handleAccept = async () => {
@@ -45,41 +45,57 @@ const AccesptReject = ({ requestID, patientID, updateStatus, requestsStatus, car
       console.log('Accept');
       
       try {
-          requestsStatus(true)
+          setrequestLoadingFunc(true)
           const response = await axios.post(`${API_BASE_URL}/provideConsent`, {
               patientID,
               requestID,
-          });
-          console.log("Consent Granted:", response.data);
-          Alert.alert("Success", "Request accepted successfully!");
-          updateStatus("CONSENT_GRANTED"); // 🔥 UI will update dynamically
-      } catch (error) {
-          console.error("Error Accepting Request:", error.response?.data || error.message);
-        //   Alert.alert("Error", "Failed to accept request.");
-      } finally {
-          setLoading(false);
-          requestsStatus(false)
-          cardStatus(false)
-
-      }
-  };
-  
-  const handleReject = async () => {
-      setLoading(true);
-      try {
-          const response = await axios.post(`${API_BASE_URL}/rejectRequest`, {
+            });
+            console.log("Consent Granted:", response.data);
+            Alert.alert("Success", "Request accepted successfully!");
+            updateStatus("CONSENT_GRANTED"); // 🔥 UI will update dynamically
+        } catch (error) {
+            setTimeout(()=>{
+                console.error("Error Accepting Request:", error.response?.data || error.message);
+                //   Alert.alert("Error", "Failed to accept request.");
+                
+            }, 5000)
+        } finally {
+            setTimeout(()=>{
+                setrequestLoadingFunc(false)
+            }, 5000)
+            setLoading(false);
+            setCardStatus(false)
+            
+        }
+    };
+    
+    const handleReject = async () => {
+        setLoading(true);
+        console.log('Reject');
+        try {
+            setrequestLoadingFunc(true)
+            const response = await axios.post(`${API_BASE_URL}/rejectRequest`, {
               patientID,
               requestID,
               rejectionReason: "Not authorized", // You can modify this
-          });
-          console.log("Request Rejected:", response.data);
-          Alert.alert("Success", "Request rejected successfully!");
-          updateStatus("REQUEST_REJECTED"); // 🔥 UI will update dynamically
-      } catch (error) {
-          console.error("Error Rejecting Request:", error.response?.data || error.message);
-          Alert.alert("Error", "Failed to reject request.");
+            });
+            console.log("Request Rejected:", response.data);
+            Alert.alert("Success", "Request rejected successfully!");
+            updateStatus("REQUEST_REJECTED"); // 🔥 UI will update dynamically
+        } catch (error) {
+            setTimeout(()=>{
+                console.error("Error Accepting Request:", error.response?.data || error.message);
+                //   Alert.alert("Error", "Failed to accept request.");
+                Alert.alert("Error", "Failed to reject request.");
+                
+            }, 5000)
+            // console.error("Error Rejecting Request:", error.response?.data || error.message);
       } finally {
-          setLoading(false);
+            setTimeout(()=>{
+                setrequestLoadingFunc(false)
+            }, 5000)
+            setLoading(false);
+            setCardStatus(false)
       }
   };
   
