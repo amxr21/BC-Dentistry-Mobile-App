@@ -65,10 +65,10 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
         }
     }, [currentStatus]);
 
-
+    
 
   return (
-    <View className="bg-white relative  rounded-xl overflow-hidden">
+    <View className="bg-white relative rounded-xl overflow-hidden">
         
         {
             requestLoading && <StatusUpdateLoading
@@ -100,49 +100,45 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
                 />}
 
             <Animated.View style={{height: animatedHeight, overflow:'hidden'}}>
-                {isExpanded &&
                 <>
-                        <DataRequestElement 
-                            header={"ID:"}
-                            containerClasses={"flex flex-col justify-between overflow-hidden"}
-                            details={id}
-                            headerClasses={"text-xl"}
-                            detailsClasses={`text- text-xl uppercase font-bold`}
-                        />
-                        <DataRequestElement 
-                            header={"Request for:"}
-                            containerClasses={""}
-                            headerClasses={"text-xl"}
-                            details={`${to}`}
-                            detailsClasses={"text-2xl font-bold"}
-                        />
+                    <DataRequestElement 
+                        header={"ID:"}
+                        containerClasses={"flex flex-col justify-between overflow-hidden"}
+                        details={id}
+                        headerClasses={"text-xl"}
+                        detailsClasses={`text- text-xl uppercase font-bold`}
+                    />
+                    <DataRequestElement 
+                        header={"Request for:"}
+                        containerClasses={""}
+                        headerClasses={"text-xl"}
+                        details={`${to}`}
+                        detailsClasses={"text-2xl font-bold"}
+                    />
 
-                        <DataRequestElement 
-                            header={"For: "}
-                            containerClasses={"flex flex-row justify-between"}
-                            headerClasses={"text-xl font-semibold"}
-                            details={about}
-                            detailsClasses={"text-xl font-semibold"}
-                        />
+                    <DataRequestElement 
+                        header={"For: "}
+                        containerClasses={"flex flex-row justify-between"}
+                        headerClasses={"text-xl font-semibold"}
+                        details={about}
+                        detailsClasses={"text-xl font-semibold"}
+                    />
 
-                
-                        <DataRequestElement 
-                            containerClasses={"flex flex-row justify-between"}
-                            header={"Requested at:"}
-                            headerClasses={"text-lg text-gray-300 font-normal italic"}
-                            details={`${date.replace('-','.').replace('-','.')} : ${time}`}
-                            detailsClasses={"text-lg text-gray-300 font-normal italic"}
-                        />
+            
+                    <DataRequestElement 
+                        containerClasses={"flex flex-row justify-between"}
+                        header={"Requested at:"}
+                        headerClasses={"text-lg text-gray-300 font-normal italic"}
+                        details={`${date.replace('-','.').replace('-','.')} : ${time}`}
+                        detailsClasses={"text-lg text-gray-300 font-normal italic"}
+                    />
                         {/* <AccesptReject func={changeStatus} /> */}
                         
                         
-                        <AccesptReject requestID={id} patientID={to} updateStatus={setCurrentStatus} setCardStatus={setIsExpanded} requestLoadingStatus={requestLoading} setrequestLoadingFunc={setRequestLoading} />
-
-                     
+                    <AccesptReject requestID={id} patientID={to} updateStatus={setCurrentStatus} setCardStatus={setIsExpanded} requestLoadingStatus={requestLoading} setrequestLoadingFunc={setRequestLoading} expandCardFunc={expandCard} />
 
 
-
-                </>}
+                </>
 
             </Animated.View>
 

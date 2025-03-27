@@ -18,7 +18,7 @@ const Requests = () => {
                 console.log("Fetched Requests:", response.data);
                 
                 if (response.data.length > 0) {
-                    setRequests(response.data.filter((request) => request.length == 'CONSENT_PENDING'));
+                    setRequests(response.data.filter((request) => request.status == 'PENDING_PATIENT_CONSENT'));
                 } else {
                     console.warn("No pending requests found.");
                 }
@@ -42,17 +42,17 @@ const Requests = () => {
             <ScrollView className='px-8 flex flex-col gap-y-8 h-[60vh]'>
 
                 <View className="flex flex-col gap-6 py-10">
-                    {/* <DataRequest
+                    <DataRequest
                         key={101}  // Use API ID
                         type={"on-chain"}  
                         from={"Ali"}
                         to={"Ahmad"}
-                        status={'Pending'}
+                        status={'PENDING_PATIENT_CONSENT'}
                         id={'017a2f8212e23b45eadf4a519460434b40a23eee754a48b5e0625bba9dc5c086'}
                         about={ "N/A"}
                         date={ "N/A"}
                         time={ "N/A"}
-                    /> */}
+                    />
                     {loading ? (
                         <Text>Loading requests...</Text>
                     ) : requests.length === 0 ? (

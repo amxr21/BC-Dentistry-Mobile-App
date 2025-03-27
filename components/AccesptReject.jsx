@@ -37,7 +37,7 @@ import { CustomButton } from './index';
 
 const API_BASE_URL = 'http://openuae.fortiddns.com:28081'; 
 
-const AccesptReject = ({ requestID, patientID, updateStatus, requestLoadingStatus, setrequestLoadingFunc }) => {
+const AccesptReject = ({ requestID, patientID, updateStatus, setCardStatus, requestLoadingStatus, setrequestLoadingFunc, expandCardFunc }) => {
     const [loading, setLoading] = useState(false);
 
     const handleAccept = async () => {
@@ -62,6 +62,7 @@ const AccesptReject = ({ requestID, patientID, updateStatus, requestLoadingStatu
         } finally {
             setTimeout(()=>{
                 setrequestLoadingFunc(false)
+                expandCardFunc()
             }, 5000)
             setLoading(false);
             setCardStatus(false)
@@ -86,13 +87,14 @@ const AccesptReject = ({ requestID, patientID, updateStatus, requestLoadingStatu
             setTimeout(()=>{
                 console.error("Error Accepting Request:", error.response?.data || error.message);
                 //   Alert.alert("Error", "Failed to accept request.");
-                Alert.alert("Error", "Failed to reject request.");
+                // Alert.alert("Error", "Failed to reject request.");
                 
             }, 5000)
             // console.error("Error Rejecting Request:", error.response?.data || error.message);
       } finally {
             setTimeout(()=>{
                 setrequestLoadingFunc(false)
+                expandCardFunc()
             }, 5000)
             setLoading(false);
             setCardStatus(false)
