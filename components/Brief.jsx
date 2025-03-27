@@ -22,23 +22,41 @@ const Brief = ({name, id}) => {
             </View>
         </View>
         
+        <View className='gap-4'>
+            <View className='flex w-full overflow-hidden justify-between flex-row gap-4'>
+                <CustomExpandable
+                    handlePress={() => {route.push('/proceedRequests')}}
+                    icon={icons.Approve}
+                    bgColor={'green-600'}
+                    textColor={'white'}
+                    text={'Approved Requests'}
+                    containerClasses={'flex-col justify-between grow h-28'}
+                    textClasses={'w-32'}
+                />
+                <CustomExpandable
+                    handlePress={() => {route.push('/rejectedRequests')}}
+                    icon={icons.Reject}
+                    bgColor={'red-600'}
+                    textColor={'white'}
+                    text={'Rejected Requests'}
+                    containerClasses={'flex-col justify-between grow h-28'}
+                    textClasses={'w-32'}
+                />
 
-        <View className='flex w-full overflow-hidden justify-between flex-row gap-4'>
+            </View>
+
             <CustomExpandable
-                handlePress={() => {route.push('/proceedRequests')}}
-                icon={icons.Approve}
-                bgColor={'green-600'}
-                textColor={'white'}
-                text={'Approved Requests'}
-            />
-            <CustomExpandable
+                handlePress={() => {route.push('/documents')}}
                 icon={icons.Attachment}
                 bgColor={'blue-950'}
                 textColor={'white'}
-                text={'test'}
+                text={'Rejected Requests'}
+                containerClasses={'h-16 items-center flex-row gap-x-4'}
+                textClasses={'text-lg'}
             />
 
         </View>
+
 
     </View>
   )

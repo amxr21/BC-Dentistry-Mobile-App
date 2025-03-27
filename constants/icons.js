@@ -22,8 +22,12 @@ import Phone from "../assets/images/icons/phone.png"
 
 import Attachment from "../assets/images/icons/attachment.png"
 import Approve from "../assets/images/icons/approve.png"
+import Reject from "../assets/images/icons/reject.png"
 
 import Gear from "../assets/images/icons/gear.gif"
+
+import Document from "../assets/images/icons/document.png"
+import Download from "../assets/images/icons/download.png"
 
 export default {
     Home,
@@ -48,5 +52,8 @@ export default {
     Phone,
     Attachment,
     Approve,
+    Reject,
     Gear,
+    Document,
+    Download,
 }

@@ -5,7 +5,7 @@ import { MedicalInfo, PersonalInfo } from './index'
 
 const Information = ({data}) => {
   return (
-    <ScrollView className='gap-y-8 max-h-[50vh]'>
+    <ScrollView className='gap-y-8 max-h-[40vh]'>
         <PersonalInfo pdata={data} />
         <MedicalInfo mdata={data[0]} />
     </ScrollView>

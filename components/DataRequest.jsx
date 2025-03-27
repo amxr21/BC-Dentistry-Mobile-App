@@ -47,24 +47,7 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
             
         }
     }
-
-    // const changeStatus = () => {
-    //     setIsAccepted((p) => !p)
-        
-    // }
-    const [statusBg, setStatusBg] = useState('min-h-0 h-0'); // use state for statusBg
-    
-
-    useEffect(() => {
-        if (currentStatus == "CONSENT_GRANTED") {
-            setStatusBg("bg-green-500");
-        } else if (currentStatus == "REQUEST_REJECTED") {
-            setStatusBg("bg-red-500");
-        } else {
-            setStatusBg("min-h-0 h-0");
-        }
-    }, [currentStatus]);
-
+ 
     
 
   return (
