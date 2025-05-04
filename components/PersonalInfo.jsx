@@ -332,7 +332,7 @@ const PersonalInfo = ({pdata}) => {
 
     const getPatient = (id) => {
         return (
-            pdata.filter((patient) => {return patient.emiratesID == id})
+            pdata?.filter((patient) => {return patient.emiratesID == id})
         )
     }
     
@@ -344,7 +344,7 @@ const PersonalInfo = ({pdata}) => {
         <View className='mb-4 p-2 gap-5'>
 
             {
-                Object.entries(getPatient(sample[0].emiratesID)[0]).map((data, i) => {
+                Object.entries(getPatient(pdata[0].emiratesID)[0]).map((data, i) => {
                     if(Object.keys(personalTags).includes(data[0])){
                         return (
                             <Field key={i} fieldTitle={personalTags[data[0]]} fieldText={typeof data[1] == 'string' ? data[1] : typeof data[1] == 'number' ? data[1] : ""} />

@@ -6,7 +6,7 @@ import { icons } from '../constants'
 const Document = ({title, type, size, content}) => {
   return (
     <View className="flex flex-row gap-x-4 w-full min-h-20 rounded-2xl items-center bg-gray-50 border border-gray-300 px-5 py-4">
-      <Image source={icons.Document} resizeMode='contain' className='w-10 h-10 ' />
+      <Image source={type == 'pdf' ? icons.Document : type == 'jpeg' || type == 'jpg' ? icons.ImageIcon : type == 'dicom' ? icons.DicomIcon : ''} resizeMode='contain' className='w-10 h-10 ' />
         
       <View className="flex flex-row items-center justify-between grow">
         <View>
@@ -17,7 +17,7 @@ const Document = ({title, type, size, content}) => {
                 <Text className='text-sm font-thing'>{size}</Text>
             </View>
         </View>
-        <Image source={icons.Download} resizeMode='contain' className='w-8 h-8 ' />
+        <Image source={icons.Download} resizeMode='contain' className='w-7 h-7 ' />
 
       </View>
     </View>

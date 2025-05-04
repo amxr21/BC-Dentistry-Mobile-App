@@ -304,10 +304,27 @@ const sample = [{
 }]
 
 
+import { useUser } from '../../Context/UserContext'
 
-import React from 'react'
+
+import React, { useEffect } from 'react'
 
 const settings = () => {
+
+  const { user } = useUser()
+
+
+
+  useEffect(() => {
+    console.log('====================================');
+    console.log(user);
+    console.log('==================================== from settings page');
+    
+  }, [])
+
+
+
+
   return (
     <SafeAreaView>
       <View className='flex flex-col items-center'>
@@ -316,9 +333,9 @@ const settings = () => {
 
 
         <View className='bg-white-off p-6 flex flex-col gap-y-8'>
-          <Brief name={`${sample[0].firstName} ${sample[0].lastName}`} id={sample[0].emiratesID} />
+          <Brief name={`${user?.firstName} ${user?.lastName}`} id={user.emiratesID} />
           
-          <Information data={sample} />
+          <Information data={user} />
            
         </View>
 

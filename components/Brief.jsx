@@ -50,7 +50,7 @@ const Brief = ({name, id}) => {
                 icon={icons.Attachment}
                 bgColor={'blue-950'}
                 textColor={'white'}
-                text={'Rejected Requests'}
+                text={'Documents'}
                 containerClasses={'h-16 items-center flex-row gap-x-4'}
                 textClasses={'text-lg'}
             />

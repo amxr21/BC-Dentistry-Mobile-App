@@ -25,9 +25,14 @@ import Approve from "../assets/images/icons/approve.png"
 import Reject from "../assets/images/icons/reject.png"
 
 import Gear from "../assets/images/icons/gear.gif"
+import Loading from "../assets/images/icons/loading.gif"
 
 import Document from "../assets/images/icons/document.png"
 import Download from "../assets/images/icons/download.png"
+import ImageIcon from "../assets/images/icons/imageIcon.png"
+import DicomIcon from "../assets/images/icons/dicom.png"
+
+
 
 export default {
     Home,
@@ -54,6 +59,9 @@ export default {
     Approve,
     Reject,
     Gear,
+    Loading,
     Document,
     Download,
+    ImageIcon,
+    DicomIcon,
 }

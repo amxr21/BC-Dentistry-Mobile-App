@@ -43,17 +43,40 @@ const documents = () => {
     <SafeAreaView>
         <View className='flex flex-col gap-4 p-6'>
         {
-            documents.length == 0 && <NoRequests text={"You havn't uploaded any documents "} />
+            // documents.length == 0 && <NoRequests text={"You havn't uploaded any documents "} />
         }
         {
-            documents.length > 0 &&
-            <Document
-                key={1}
-                title='Document Title'
-                type={'PDF'}
-                size={'1 MB'}
-                content={''}
-            />
+            // documents.length > 0 &&
+            <>
+                <Document
+                    key={1}
+                    title='Terms & Conditions policies'
+                    type={'pdf'}
+                    size={'1.2 MB'}
+                    content={''}
+                />
+                <Document
+                    key={2}
+                    title='Sharing data Consent'
+                    type={'pdf'}
+                    size={'1.2 MB'}
+                    content={''}
+                />
+                <Document
+                    key={4}
+                    title='DICOM Image'
+                    type={'dicom'}
+                    size={'1.2 MB'}
+                    content={''}
+                />
+                <Document
+                    key={3}
+                    title='Personal Photo'
+                    type={'jpeg'}
+                    size={'1.2 MB'}
+                    content={''}
+                />
+            </>
         }
 
         </View>

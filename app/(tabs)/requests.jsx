@@ -7,7 +7,24 @@ import { RequestsHeader, DataRequest, NoRequests } from '../../components';
 
 const API_BASE_URL = 'http://openuae.fortiddns.com:28081'; 
 
+import { useUser } from '../../Context/UserContext';
+
+
 const Requests = () => {
+
+    const { user } = useUser()
+
+
+    // useEffect(() => {
+    //     console.log('====================================');
+    //     console.log(user);
+    //     console.log('====================================');
+    // }, [])
+
+
+
+
+
     const [requests, setRequests] = useState([]); // Store API response
     const [loading, setLoading] = useState(true);
 
@@ -15,7 +32,7 @@ const Requests = () => {
         const fetchRequests = async () => {
             try {
                 const response = await axios.get(`${API_BASE_URL}/getAllRequestsForPatient/Patient1`);
-                console.log("Fetched Requests:", response.data);
+                // console.log("Fetched Requests:", response.data);
                 
                 if (response.data.length > 0) {
                     setRequests(response.data.filter((request) => request.status == 'PENDING_PATIENT_CONSENT'));

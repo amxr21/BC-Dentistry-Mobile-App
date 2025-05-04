@@ -4,7 +4,7 @@ import Field from './Field';
 
 const MedicalInfo = ({mdata}) => {
   console.log('sssssssss====================================');
-  console.log(mdata.medicalRecords);
+  console.log(mdata?.medicalRecords);
   console.log('sssssss====================================');
   return (
     <View>
