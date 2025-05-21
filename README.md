@@ -22,7 +22,6 @@ The **BC-Dentistry Mobile App** is a cross-platform mobile application tailored 
 | Layer        | Technologies Used                 |
 |--------------|------------------------------------|
 | **Frontend** | React Native, NativeWind, Expo     |
-| **Auth**     | Token-based authentication         |
 | **State**    | React Context                      |
 | **API**      | Connected to [BC-Dentistry Backend](https://github.com/amxr21/bc-dentistry-backend) |
 
