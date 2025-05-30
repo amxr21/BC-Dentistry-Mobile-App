@@ -13,7 +13,7 @@ const home = () => {
 
       <StatusBar style='dark' />
 
-      <View className="bg-white-off p-8 flex flex-col gap-y-8">
+      <View className="bg-white-off p-6 flex flex-col gap-y-8">
         <UserBar />
 
         <ScrollView horizontal className="flex flex-row gap-6">

@@ -1,6 +1,6 @@
 const appointmentsData = [
     {
-      date: '15.02.2025',
+      date: '15.05.2025',
       time: '09:30 AM',
       status: 'Upcoming',
       dr: {
@@ -10,7 +10,7 @@ const appointmentsData = [
       }
     },
     {
-      date: '20.02.2025',
+      date: '20.05.2025',
       time: '11:00 AM',
       status: 'Upcoming',
       dr: {
@@ -40,7 +40,7 @@ const appointmentsData = [
       }
     },
     {
-      date: '05.03.2025',
+      date: '05.05.2025',
       time: '03:45 PM',
       status: 'Upcoming',
       dr: {

@@ -6,6 +6,9 @@ import CustomInput from '../CustomInput'
 import CustomButton from '../CustomButton'
 import { Link } from 'expo-router'
 
+
+
+
 const signUp = () => {
 
     const [ form, setForm ] = useState({
@@ -15,22 +18,25 @@ const signUp = () => {
             password: ""
         })
 
-        const [ isSubmitting, setIsSubmitting ] = useState(false)
+    const [ isSubmitting, setIsSubmitting ] = useState(false)
 
 
 
 
-    const SignUp = () => {
+    const SignUpFunc = () => {
         if(form.firstName == "" || form.lastName == "" || form.email == "" || form.password == ""){
             Alert.alert("All fields are required")
             return;
         }
 
-        setIsSubmitting(true)
-
-
+        
+        
         try{
-            console.log(form);
+            setIsSubmitting(true)
+
+
+            
+            // console.log(form);
             route.replace('/home')
         }catch(error){
             console.log(error);
@@ -41,15 +47,10 @@ const signUp = () => {
 
 
 
-        console.log('====================================');
-        console.log(form);
-        console.log('====================================');
+    //     console.log('====================================');
+    //     console.log(form);
+    //     console.log('====================================');
     }
-
-
-
-
-
 
 
   return (
@@ -107,7 +108,7 @@ const signUp = () => {
 
 
 
-                    <CustomButton text={'Sign Up'} handleClick={SignUp} style='mt-12' />
+                    <CustomButton text={'Sign Up'} handleClick={SignUpFunc} style='mt-12' />
 
 
 

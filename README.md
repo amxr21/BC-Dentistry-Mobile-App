@@ -1,50 +1,78 @@
-# Welcome to your Expo app 👋
+# 📱 BC-Dentistry Mobile App – Patient Record Access on the Go
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+The **BC-Dentistry Mobile App** is a cross-platform mobile application tailored for doctors at the College of Dentistry. It provides secure access to patient data, medical history, and appointment information right from their mobile devices — ensuring care continuity and convenience.
 
-## Get started
+🛠️ **Built With React Native + NativeWind**  
+🔒 Secure. 🧠 Fast. 📲 Doctor-Friendly.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## ✨ Highlights
 
-2. Start the app
+✅ View real-time patient data and medical/dental records  
+✅ Browse past treatments and diagnosis history  
+✅ Access appointment schedules anywhere, anytime  
+✅ Optimized for both Android and iOS  
+✅ Beautiful, clean UI using **NativeWind**  
 
-   ```bash
-    npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🚀 Tech Stack
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+| Layer        | Technologies Used                 |
+|--------------|------------------------------------|
+| **Frontend** | React Native, NativeWind, Expo     |
+| **State**    | React Context                      |
+| **API**      | Connected to [BC-Dentistry Backend](https://github.com/amxr21/bc-dentistry-backend) |
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
-
-When you're ready, run:
+## 📂 Project Structure
 
 ```bash
-npm run reset-project
+BC-Dentistry-Mobile-App/
+├── assets/               # App icons, images, and fonts
+├── components/           # Reusable components (headers, lists, etc.)
+├── constants/            # Color palettes, configs, and constants
+├── context/              # Global state management (Auth, User)
+├── screens/              # Main views (Home, PatientList, RecordView)
+├── services/             # API interaction functions
+├── App.js                # App root and navigation config
+├── app.json              # Expo configuration
+├── package.json          # Dependencies and scripts
+└── README.md             # Project documentation
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🧑‍💻 Doctor Use Case (Patient-Centered)
 
-## Learn more
+- 📅 **Manage Appointment Requests**  
+  View all submitted appointment requests from patients with options to **accept or reject** them.
 
-To learn more about developing your project with Expo, look at the following resources:
+- 📄 **Personal & Medical Info Page**  
+  Access detailed patient information including personal data, medical history, and all appointment requests status (submitted, accepted, rejected).
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- 📁 **File Management**  
+  View and handle attached files related to patient records and requests.
 
-## Join the community
+- 🔐 **Secure Login & Access Control**  
+  Ensures that only authorized doctors can view and manage patient data and requests.
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 📊 Key Features
+
+- ⚡ **Fast and lightweight performance**  
+- 💡 **Simple and intuitive navigation tailored for doctors**  
+- 🌙 **Dark mode-ready (optional)**  
+- 🔄 **Real-time sync with backend for up-to-date info**  
+- 📱 **Responsive design for multiple screen sizes**
+
+---
+
+## 🙌 Acknowledgements
+
+- 🏫 **College of Dentistry – BC**  
+  For valuable feedback and real-world scenarios that guided development.
+
+- 👨‍💻 **Contributors & Testers**  
+  Your help refining features and usability is much appreciated.
