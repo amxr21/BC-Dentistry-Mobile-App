@@ -56,6 +56,8 @@ const SignIn = () => {
         setUser(foundUser); // Set the user in context
         router.replace('/home'); // Navigate to home
       } else {
+        setIsLoading(false);
+        setIsSubmitting(false);
         Alert.alert(
           "No account found",
           "Email does not exist. Contact the clinic to check your account credentials."

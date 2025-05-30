@@ -22,7 +22,7 @@ const appointmentsData = [
     {
       date: '25.01.2025',
       time: '02:15 PM',
-      status: 'Past',
+      status: 'Completed',
       dr: {
         name: 'Yusuf Malik',
         avatar: 'https://via.placeholder.com/150',
@@ -32,7 +32,7 @@ const appointmentsData = [
     {
       date: '01.02.2025',
       time: '10:00 AM',
-      status: 'Past',
+      status: 'Completed',
       dr: {
         name: 'Mariam Saleh',
         avatar: 'https://via.placeholder.com/150',

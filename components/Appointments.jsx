@@ -10,9 +10,9 @@ import { appointmentsData } from "../data"
 const Appointments = ({status}) => {
 
     
-    useEffect(() => {
-        console.log(appointmentsData.filter((a) => String(a.status).toLowerCase() == String(status).toLowerCase()));
-    }, [status])
+    // useEffect(() => {
+    //     console.log(appointmentsData.filter((a) => String(a.status).toLowerCase() == String(status).toLowerCase()));
+    // }, [status])
 
 
 

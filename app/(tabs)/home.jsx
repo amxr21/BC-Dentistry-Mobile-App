@@ -18,7 +18,7 @@ const home = () => {
 
         <ScrollView horizontal className="flex flex-row gap-6">
           <Statstic icon={icons.greenClock} label="Completed" number="2" />
-          <Statstic icon={icons.blueClock} label="Pending" number="5" />
+          <Statstic icon={icons.blueClock} label="Upcoming" number="5" />
           <Statstic icon={icons.redClock} label="Canceled" number="1" />
 
         </ScrollView>

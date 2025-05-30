@@ -15,9 +15,9 @@ const Appointment = ({date, time, dr}) => {
             </View>
 
         </View>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
             <Image source={icons.options} resizeMode='contain' className="w-4 h-4" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       
 
