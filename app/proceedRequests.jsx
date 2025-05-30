@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
-import { DataRequest } from '../components'
+import { DataRequest, NoRequests } from '../components'
 import axios from 'axios';
 
 const API_BASE_URL = 'http://openuae.fortiddns.com:28081'; 
@@ -35,8 +35,9 @@ const proceedRequests = () => {
     <SafeAreaView>
         <View className='flex flex-col gap-4 p-6'>
           <View>
-            <Text className='text-2xl font-semibold'>Proceed Requests</Text>
-            <Text className='text-lg font-light leading-2x'>here you can find all the request that you have agreed to share information about</Text>
+            {/* <Text className='text-2xl font-semibold'>Processed Requests</Text> */}
+            <NoRequests text={'No processed requests'}/>
+            <Text className='text-md font-light mt-5 text-gray-400'>Here you can find all the requests for which you have agreed to share your information.</Text>
           </View>
 
           <ScrollView className='pb-4 h-[82vh]'>

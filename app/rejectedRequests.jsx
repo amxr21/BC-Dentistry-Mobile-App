@@ -35,8 +35,9 @@ const rejectedRequests = () => {
     <SafeAreaView>
         <View className='flex flex-col gap-4 p-6'>
           <View>
-            <Text className='text-2xl font-semibold mb-2'>Rejected Requests</Text>
-            <Text className='text-lg font-light text-justify leading-6'>here you can find all the request that you rejected to share your data with</Text>
+            {/* <Text className='text-2xl font-semibold mb-2'>Rejected Requests</Text> */}
+            <NoRequests text={'No rejected requests'}/>
+            <Text className='text-md font-light mt-5 text-gray-400'>This section lists all the requests in which you declined to share your data.</Text>
           </View>
 
           <ScrollView className='pb-4 h-[82vh]'>
