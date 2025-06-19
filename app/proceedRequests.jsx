@@ -54,7 +54,7 @@ const proceedRequests = () => {
                     <DataRequest
                         key={request.requestID}  // Use API ID
                         type={request.type || "on-chain"}  
-                        from={request.doctorID}
+                        from={request.doctorName}
                         to={request.patientID}
                         status={request.status}
                         id={request.requestID}
