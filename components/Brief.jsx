@@ -15,7 +15,7 @@ const Brief = ({name, id}) => {
   return (
     <View className='gap-y-7 rounded-lg'>
         <View className='header w-full flex flex-row gap-x-8'>
-            <Image source={""} className='bg-gray-300 w-20 h-20 rounded-[1.5rem]' />
+            <Image source={"#"} className='bg-gray-300 w-20 h-20 rounded-[1.5rem]' />
             <View className='flex gap-y-1 justify-center'>
                 <Text className='text-4xl font-bold'>{name}</Text>
                 <Text className='text-xl'>ID: {id}</Text>

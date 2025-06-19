@@ -6,7 +6,7 @@ import { CustomButton, DataRequestElement, AccesptReject, StatusUpdateLoading } 
 
 
 
-const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisible = true}) => {
+const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisible = true, clinicName, dataType}) => {
 
     const requestCard = useRef()
 
@@ -30,6 +30,10 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
     const requestCardButton = useRef()
     
     const expandCard = (e) => {
+
+        console.log(currentStatus.toLowerCase());
+        
+
         if(isExpanded){
             Animated.timing(animatedHeight, {
                 toValue:0,
@@ -40,7 +44,7 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
         else{
             setIsExpanded(true)
             Animated.timing(animatedHeight, {
-                toValue: 250,
+                toValue: 200,
                 duration: 300,
                 useNativeDriver: false,
             }).start()
@@ -52,7 +56,7 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
 
   return (
     <View className="bg-white relative rounded-xl overflow-hidden">
-        
+
         {
             requestLoading && <StatusUpdateLoading
                 reff = {requestCard}
@@ -63,8 +67,8 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
         }
 
         <View className="flex p-4 flex-col gap-y-2 rounded-xl">
-            <View className={`${type.toLowerCase() == 'off-chain' ? "bg-red-600" : "bg-green-600" } rounded-xl`}>
-                <Text className="text-white px-3 py-2  text-2xl uppercase font-bold">{type}</Text>
+            <View className={`${(currentStatus.toLowerCase() == 'request_rejected' || status == "REJECTED") ? "bg-red-600" : currentStatus.toLowerCase() == 'pending_patient_consent' ? 'bg-[#FF9500]' : "bg-green-600" } rounded-xl`}>
+                <Text className="text-white px-3 py-2  text-2xl uppercase font-bold">{currentStatus.toLowerCase() == "consent_granted" ? "GRANTED" : currentStatus.toLowerCase() == "pending_patient_consent" ? "PENDING" : (currentStatus.toLowerCase() == "request_rejected" || status == "REJECTED" ) ? "REJECTED" : ""}</Text>
             </View>
 
                 <DataRequestElement 
@@ -84,28 +88,42 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
 
             <Animated.View style={{height: animatedHeight, overflow:'hidden'}}>
                 <>
-                    <DataRequestElement 
+                    {/* <DataRequestElement 
                         header={"ID:"}
                         containerClasses={"flex flex-col justify-between overflow-hidden"}
                         details={id}
                         headerClasses={"text-xl"}
                         detailsClasses={`text- text-xl uppercase font-bold`}
+                    /> */}
+                    <DataRequestElement 
+                        header={"Clinic:"}
+                        containerClasses={"flex flex-col justify-between overflow-hidden"}
+                        details={clinicName}
+                        headerClasses={"text-xl"}
+                        detailsClasses={`text- text-xl font-bold`}
                     />
                     <DataRequestElement 
+                        header={"For:"}
+                        containerClasses={"flex justify-between overflow-hidden"}
+                        details={dataType}
+                        headerClasses={"text-xl"}
+                        detailsClasses={`text- text-xl font-bold`}
+                    />
+                    {/* <DataRequestElement 
                         header={"Request for:"}
                         containerClasses={""}
                         headerClasses={"text-xl"}
                         details={`${to}`}
                         detailsClasses={"text-2xl font-bold"}
-                    />
+                    /> */}
 
-                    <DataRequestElement 
+                    {/* <DataRequestElement 
                         header={"For: "}
                         containerClasses={"flex flex-row justify-between"}
                         headerClasses={"text-xl font-semibold"}
                         details={about}
                         detailsClasses={"text-xl font-semibold"}
-                    />
+                    /> */}
 
             
                     <DataRequestElement 
@@ -127,12 +145,12 @@ const DataRequest = ({type, from, to, status, id, about, date, time, optionsVisi
 
 
             <DataRequestElement 
-                header={"Status:"}
+                header={"Type:"}
                 containerClasses={"flex flex-row justify-between gap-x-8"}
                 headerClasses={"text-xl"}
-                details={currentStatus == "CONSENT_GRANTED" ? "GRANTED" : currentStatus == "PENDING_PATIENT_CONSENT" ? "PENDING" : "REJECTED"}  //  Updated dynamically
+                details={type}  //  Updated dynamically
                 detailsClasses={`grow text-right text-xl uppercase font-bold 
-                    ${currentStatus === 'PENDING_PATIENT_CONSENT' ? 'text-[#FF9500]' :
+                    ${currentStatus === 'pending_patient_consent' ? 'text-[#FF9500]' :
                     currentStatus === 'CONSENT_GRANTED' ? 'text-green-500' :
                     'text-red-600'}`}
             />

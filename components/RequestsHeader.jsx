@@ -9,7 +9,7 @@ const RequestsHeader = ({requests}) => {
 
             <View className="flex flex-row gap-x-4 p-6 bg-white rounded-3xl">
               <Text className="text-black text-8xl font-extrabold h-[5rem] min-w-16 w-16 text-center">{requests.filter((request) => request.status == 'PENDING_PATIENT_CONSENT').length}</Text>
-              <Text className="text-black w-48 text-justify">data requests waiting for your consent</Text>
+              <Text className="text-black w-48 text-justify">Data requests waiting for your consent</Text>
             </View>
 
         </View>

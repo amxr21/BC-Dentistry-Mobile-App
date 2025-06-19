@@ -1,5 +1,5 @@
 import { View, Text, Animated, Image } from 'react-native'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { icons } from '../constants'
 
@@ -8,23 +8,26 @@ const StatusUpdateLoading = ({reff, status, requestLoadingStatus, setrequestLoad
 
   const animatedHeight = useRef(new Animated.Value(0)).current
 
+  useEffect(() => {
+    if(!requestLoadingStatus){
+      Animated.timing(animatedHeight, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false
+      }).start(() => setrequestLoadingFunc(false))
+    }
+    else{
+      setrequestLoadingFunc(true)
+      Animated.timing(animatedHeight, {
+        toValue: 460,
+        duration: 300,
+        useNativeDriver: false
+      }).start()
+      
+    }
 
-  if(!requestLoadingStatus){
-    Animated.timing(animatedHeight, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: false
-    }).start(() => setrequestLoadingFunc(false))
-  }
-  else{
-    setrequestLoadingFunc(true)
-    Animated.timing(animatedHeight, {
-      toValue: 460,
-      duration: 300,
-      useNativeDriver: false
-    }).start()
-    
-  }
+  }, [requestLoadingStatus])
+
 
 
   return (

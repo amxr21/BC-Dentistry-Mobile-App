@@ -73,19 +73,21 @@ const Requests = () => {
                     {loading ? (
                         <Text>Loading requests...</Text>
                     ) : requests.length === 0 ? (
-                        <NoRequests text={"All done, you don't have any pending requests!"} />
+                        <NoRequests text={"All Done! you don't have any requests waiting for your consent"} />
                     ) : (
                         requests.filter((request) => request.status == 'PENDING_PATIENT_CONSENT').map((request) => (
                             <DataRequest
                                 key={request.requestID}  // Use API ID
                                 type={request.type || "on-chain"}  
-                                from={request.doctorID}
+                                from={request.doctorName}
                                 to={request.patientID}
                                 status={request.status}
                                 id={request.requestID}
                                 about={request.about || "N/A"}
                                 date={request.date || "N/A"}
                                 time={request.time || "N/A"}
+                                clinicName={request.doctorClinicName}
+                                dataType={request.dataType}
                             />
                         ))
                     )}

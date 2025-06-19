@@ -6,8 +6,8 @@ import { MedicalInfo, PersonalInfo } from './index'
 const Information = ({data}) => {
   return (
     <ScrollView className='gap-y-8 max-h-[40vh]'>
-        {/* <PersonalInfo pdata={[data]} /> */}
-        {/* <MedicalInfo mdata={data} /> */}
+        <PersonalInfo pdata={[data]} />
+        <MedicalInfo mdata={data} />
     </ScrollView>
   )
 }

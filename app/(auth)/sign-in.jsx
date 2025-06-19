@@ -122,7 +122,7 @@ const SignIn = () => {
             <Text className="text-center text-white text-2xl">Loading ⏳</Text>
           </View>
         )}
-      </ScrollView>
+      </ScrollView> 
     </SafeAreaView>
   );
 };

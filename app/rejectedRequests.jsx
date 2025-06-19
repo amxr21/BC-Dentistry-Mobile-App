@@ -36,18 +36,20 @@ const rejectedRequests = () => {
         <View className='flex flex-col gap-4 p-6'>
           <View>
             {/* <Text className='text-2xl font-semibold mb-2'>Rejected Requests</Text> */}
-            <NoRequests text={'No rejected requests'}/>
-            <Text className='text-md font-light mt-5 text-gray-400'>This section lists all the requests in which you declined to share your data.</Text>
+            {reqests.length == 0 && !isLoading && <>
+              <NoRequests text={'No rejected requests'}/>
+              <Text className='text-md font-light mt-5 text-gray-400'>This section lists all the requests in which you declined to share your data.</Text>
+            </>}
           </View>
 
           <ScrollView className='pb-4 h-[82vh]'>
             <View className="flex flex-col gap-y-4">
               {
-                isLoading && <View><Text>it is loading</Text></View>
+                isLoading && reqests == 0 && <View><Text>It is loading</Text></View>
               }
 
               {
-                !isLoading && reqests.filter((request)=>request.status == 'REJECTED').map((request) => {
+                !isLoading && reqests.length != 0 && reqests.filter((request)=>request.status == 'REJECTED').map((request) => {
                   return (
                     <DataRequest
                         key={request.requestID}  // Use API ID

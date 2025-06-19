@@ -16,15 +16,12 @@ const proceedRequests = () => {
   useEffect(() => {
     axios.get(`${API_BASE_URL}/getAllRequestsForPatient/Patient1`)
     .then((response)=> {
-      setRequests(response.data)
       setIsLoading(true)
+      setRequests(response.data)
     })
     .finally(() => {
       setIsLoading(false)
     })
-
-
-
   }, [])
 
 
@@ -36,18 +33,23 @@ const proceedRequests = () => {
         <View className='flex flex-col gap-4 p-6'>
           <View>
             {/* <Text className='text-2xl font-semibold'>Processed Requests</Text> */}
-            <NoRequests text={'No processed requests'}/>
-            <Text className='text-md font-light mt-5 text-gray-400'>Here you can find all the requests for which you have agreed to share your information.</Text>
+            {
+              reqests == 0 && !isLoading &&
+              <>
+                <NoRequests text={'No Approved Requests'}/>
+                <Text className='text-md font-light text-gray-400 mt-5'>Here you can find all the requests for which you have agreed to share your information.</Text>
+              </>
+              }
           </View>
 
           <ScrollView className='pb-4 h-[82vh]'>
             <View className="flex flex-col gap-y-4">
               {
-                isLoading && <View><Text>it is loading</Text></View>
+                isLoading && reqests == 0 && <View><Text>It is loading</Text></View>
               }
 
               {
-                reqests.filter((request)=>request.status == 'CONSENT_GRANTED').map((request) => {
+                !isLoading && reqests != 0 && reqests.filter((request)=>request.status == 'CONSENT_GRANTED').map((request) => {
                   return (
                     <DataRequest
                         key={request.requestID}  // Use API ID

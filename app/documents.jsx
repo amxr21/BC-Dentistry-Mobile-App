@@ -64,14 +64,14 @@ const documents = () => {
                 />
                 <Document
                     key={4}
-                    title='DICOM Image'
-                    type={'dicom'}
+                    title='Medical Images'
+                    type={'jpeg'}
                     size={'1.2 MB'}
                     content={''}
                 />
                 <Document
                     key={3}
-                    title='Personal Photo'
+                    title='Photographs'
                     type={'jpeg'}
                     size={'1.2 MB'}
                     content={''}

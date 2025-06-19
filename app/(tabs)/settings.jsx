@@ -332,7 +332,7 @@ const settings = () => {
         <PageHeader headerText={'Info'} />
 
 
-        <View className='bg-red-500 p-6 flex flex-col gap-y-8'>
+        <View className='p-6 flex flex-col gap-y-8'>
           <Brief name={`${user?.firstName} ${user?.lastName}`} id={user.emiratesID} />
           
           <Information data={user} />
